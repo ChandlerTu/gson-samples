@@ -3,11 +3,12 @@ package com.chandlertu.gson.samples;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 import org.junit.Test;
 
@@ -19,20 +20,30 @@ public class DateFormatTests {
 
   @Test
   public void toJson() throws ParseException {
-    Date date = dataFormat.parse("2018-01-04 12:29:12.123");
+    DateFieldExample dateField = new DateFieldExample(dataFormat.parse("2018-01-04 12:29:12.123"));
 
-    String json = gson.toJson(date);
+    String json = gson.toJson(dateField);
 
-    assertThat(json).isEqualTo("\"Jan 4, 2018 12:29:12 PM\"");
+    assertThat(json).isEqualTo("{\"date\":\"Jan 4, 2018 12:29:12 PM\"}");
   }
 
   @Test
   public void fromJson() throws ParseException {
-    String json = "\"Jan 4, 2018 12:29:12 PM\"";
+    String json = "{\"date\":\"Jan 4, 2018 12:29:12 PM\"}";
 
-    Date date = gson.fromJson(json, Date.class);
+    DateFieldExample dateField = gson.fromJson(json, DateFieldExample.class);
 
-    assertThat(date).isEqualTo(dataFormat.parse("2018-01-04 12:29:12.000"));
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(dateField.getDate());
+    assertThat(calendar.get(Calendar.SECOND)).isEqualTo(12);
+    assertThat(calendar.get(Calendar.MILLISECOND)).isEqualTo(0);
+  }
+
+  @Test(expected = JsonParseException.class)
+  public void givenDateValueIsEmptyWhenFromJson() {
+    String json = "{date:\"\"}";
+
+    gson.fromJson(json, DateFieldExample.class);
   }
 
 }

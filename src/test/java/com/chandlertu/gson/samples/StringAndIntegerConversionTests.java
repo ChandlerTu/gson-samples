@@ -10,7 +10,7 @@ public class StringAndIntegerConversionTests {
 
   @Test
   public void toJson() {
-    StringField o = new StringField();
+    StringFieldExample o = new StringFieldExample();
     o.setField("1");
     String j = gson.toJson(o);
     System.out.println(j);
@@ -18,7 +18,7 @@ public class StringAndIntegerConversionTests {
 
   @Test
   public void fromJson() {
-    IntegerField o = gson.fromJson("{\"field\":\"1\"}", IntegerField.class);
+    IntegerFieldExample o = gson.fromJson("{\"field\":\"1\"}", IntegerFieldExample.class);
     Integer i = o.getField();
     System.out.println(i);
   }

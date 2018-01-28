@@ -1,6 +1,6 @@
 package com.chandlertu.gson.samples;
 
-public class IntegerField {
+public class IntegerFieldExample {
 
   private Integer field;
 

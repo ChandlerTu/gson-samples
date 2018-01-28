@@ -1,6 +1,6 @@
 package com.chandlertu.gson.samples;
 
-public class StringField {
+public class StringFieldExample {
 
   private String field;
 
