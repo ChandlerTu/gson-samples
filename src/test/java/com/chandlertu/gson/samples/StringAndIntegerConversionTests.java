@@ -1,7 +1,5 @@
 package com.chandlertu.gson.samples;
 
-import com.chandlertu.gson.samples.IntegerField;
-import com.chandlertu.gson.samples.StringField;
 import com.google.gson.Gson;
 
 import org.junit.Test;
